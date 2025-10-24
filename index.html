@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Clock</title>
-    <!-- Load Particles.js library --><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Load Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200..900&display=swap" rel="stylesheet">
 
     <style>
-        /* (Your existing CSS here, copied from previous response) */
-
         /* Base Styles and Font */
         * {
             margin: 0;
@@ -20,7 +19,8 @@
         }
 
         body {
-            background-color: #1d1d1d; /* Dark background */
+            background-color: #1d1d1d;
+            /* Dark background */
             min-height: 100vh;
             overflow: hidden;
             position: relative;
@@ -33,7 +33,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Changed to 0 so clock is above it */
+            z-index: 0;
+            /* Changed to 0 so clock is above it */
         }
 
         /* Clock Container */
@@ -44,10 +45,11 @@
             transform: translate(-50%, -50%);
             display: flex;
             gap: 40px;
-            color: #40E0D0; /* Turquoise color for clock numbers */
+            color: #40E0D0;
+            /* Turquoise color for clock numbers */
             z-index: 1;
             /* Added for responsiveness */
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
             justify-content: center;
         }
 
@@ -71,7 +73,8 @@
             width: 100%;
             height: 100%;
             fill: transparent;
-            stroke: rgba(63, 47, 47, 0.5); /* Semi-transparent base circle */
+            stroke: rgba(63, 47, 47, 0.5);
+            /* Semi-transparent base circle */
             stroke-width: 4;
             transform: translate(5px, 5px);
         }
@@ -79,7 +82,8 @@
         #time .circle svg circle:nth-child(2) {
             stroke: var(--clr);
             stroke-dasharray: 440;
-            transition: stroke-dashoffset 1s linear; /* Smooth animation */
+            transition: stroke-dashoffset 1s linear;
+            /* Smooth animation */
         }
 
         #time .circle div {
@@ -100,11 +104,13 @@
 
         #time .ap {
             position: relative;
-            font-size: 1.5em; /* Adjusted size */
+            font-size: 1.5em;
+            /* Adjusted size */
             transform: translateX(-10px);
             font-weight: 600;
             align-self: center;
-            color: #FF8C00; /* Orange AM/PM */
+            color: #FF8C00;
+            /* Orange AM/PM */
         }
 
         /* Dot Movement */
@@ -142,7 +148,7 @@
             z-index: 10;
             line-height: 1;
             /* Vibrant blue/cyan glow */
-            text-shadow: 0 0 15px #00FFFF, 0 0 50px #00BFFF; 
+            text-shadow: 0 0 15px #00FFFF, 0 0 50px #00BFFF;
         }
 
         #birthday-message p {
@@ -155,23 +161,27 @@
 
         #birthday-message .happy {
             font-size: 3.5em;
-            color: #FF8C00; /* Dark Orange */
+            color: #FF8C00;
+            /* Dark Orange */
         }
 
         #birthday-message .age {
-            font-size: 5em; 
-            color: #40E0D0; /* Turquoise/Cyan */
+            font-size: 5em;
+            color: #40E0D0;
+            /* Turquoise/Cyan */
             letter-spacing: 0.1em;
         }
 
         #birthday-message .birthday {
             font-size: 7em;
-            color: #00BFFF; /* Deep Sky Blue */
+            color: #00BFFF;
+            /* Deep Sky Blue */
         }
 
         #birthday-message .name {
             font-size: 5.5em;
-            color: #FFFFFF; /* White/Silver */
+            color: #FFFFFF;
+            /* White/Silver */
             margin-top: 15px;
         }
 
@@ -179,18 +189,47 @@
         #birthday-message p:hover {
             transform: scale(1.05);
         }
-        
-        @media (max-width: 600px) {
-            #time { gap: 20px; }
-            #time .circle { width: 100px; height: 100px; }
-            #time .circle svg { width: 100px; height: 100px; }
-            #time .circle svg circle { r: 50; cx: 50; cy: 50; }
-            #time .circle div { font-size: 1em; }
 
-            #birthday-message .happy { font-size: 2em; }
-            #birthday-message .age { font-size: 3em; }
-            #birthday-message .birthday { font-size: 4em; }
-            #birthday-message .name { font-size: 3.5em; }
+        @media (max-width: 600px) {
+            #time {
+                gap: 20px;
+            }
+
+            #time .circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            #time .circle svg {
+                width: 100px;
+                height: 100px;
+            }
+
+            #time .circle svg circle {
+                r: 50;
+                cx: 50;
+                cy: 50;
+            }
+
+            #time .circle div {
+                font-size: 1em;
+            }
+
+            #birthday-message .happy {
+                font-size: 2em;
+            }
+
+            #birthday-message .age {
+                font-size: 3em;
+            }
+
+            #birthday-message .birthday {
+                font-size: 4em;
+            }
+
+            #birthday-message .name {
+                font-size: 3.5em;
+            }
         }
 
         /* NEW: Firework Container for Birthday */
@@ -198,20 +237,25 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Centered with message */
-            width: 100%; /* Take full width */
-            height: 100%; /* Take full height */
-            z-index: 9; /* Below the message, above background particles */
-            pointer-events: none; /* Allow clicks to pass through */
+            transform: translate(-50%, -50%);
+            /* Centered with message */
+            width: 100%;
+            /* Take full width */
+            height: 100%;
+            /* Take full height */
+            z-index: 9;
+            /* Below the message, above background particles */
+            pointer-events: none;
+            /* Allow clicks to pass through */
         }
-
     </style>
 </head>
 
 <body>
     <div id="particles-js">
         <div id="time">
-            <!-- HOURS --><div class="circle" style="--clr : #FF8C00">
+            <!-- HOURS -->
+            <div class="circle" style="--clr : #FF8C00">
                 <div class="dots hr_dot"></div>
                 <svg>
                     <circle cx="70" cy="70" r="70"></circle>
@@ -220,7 +264,8 @@
                 <div id="hours">00</div>
             </div>
 
-            <!-- MINUTES --><div class="circle" style="--clr : #00BFFF">
+            <!-- MINUTES -->
+            <div class="circle" style="--clr : #00BFFF">
                 <div class="dots min_dot"></div>
                 <svg>
                     <circle cx="70" cy="70" r="70"></circle>
@@ -229,7 +274,8 @@
                 <div id="minutes">00</div>
             </div>
 
-            <!-- SECONDS --><div class="circle" style="--clr : #40E0D0">
+            <!-- SECONDS -->
+            <div class="circle" style="--clr : #40E0D0">
                 <div class="dots sec_dot"></div>
                 <svg>
                     <circle cx="70" cy="70" r="70"></circle>
@@ -238,17 +284,233 @@
                 <div id="seconds">00</div>
             </div>
 
-            <!-- AM/PM --><div class="ap">
+            <!-- AM/PM -->
+            <div class="ap">
                 <div id="ampm">AM</div>
             </div>
         </div>
-        
-        <!-- NEW: Container for birthday specific fireworks --><div id="birthday-fireworks"></div>
+
+        <!-- NEW: Container for birthday specific fireworks -->
+        <div id="birthday-fireworks"></div>
 
     </div>
 
     <script>
-        // (Your existing JavaScript code will go here, updated in next step)
+        // --- Configuration for the background particles ---
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#ffffff" },
+                "shape": {
+                    "type": "circle",
+                    "stroke": { "width": 0, "color": "#000000" }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 5,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out"
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // --- Configuration for the birthday fireworks (a separate particles.js instance) ---
+        const birthdayFireworksConfig = {
+            "particles": {
+                "number": {
+                    "value": 50, // More particles for a burst
+                    "density": { "enable": true, "value_area": 1000 }
+                },
+                "color": { "value": ["#FF8C00", "#00BFFF", "#40E0D0", "#FFFFFF"] }, // Multiple vibrant colors
+                "shape": {
+                    "type": "star", // Star shape for fireworks
+                    "stroke": { "width": 0, "color": "#000000" }
+                },
+                "opacity": {
+                    "value": 1,
+                    "random": true,
+                    "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } // Fade out
+                },
+                "size": {
+                    "value": 8, // Larger particles
+                    "random": true,
+                    "anim": { "enable": true, "speed": 1, "size_min": 0.5, "sync": false } // Shrink
+                },
+                "line_linked": { "enable": false }, // No lines for fireworks
+                "move": {
+                    "enable": true,
+                    "speed": 5, // Faster movement
+                    "direction": "random", // Explode in random directions
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": { "events": { "onhover": { "enable": false } }, "modes": { "grab": { "distance": 0 } } },
+            "retina_detect": true
+        };
+
+        let birthdayParticlesInstance = null; // To hold the reference to the birthday fireworks instance
+
+        // Main Clock Update Logic
+        setInterval(() => {
+            let date = new Date();
+            let currentHour24 = date.getHours();
+            let currentMinute = date.getMinutes();
+
+            // 🎯 Target time for the birthday message: 9:28 PM (21:28 in 24-hour format)
+            const targetHour24 = 21; // 9 PM
+            const targetMinute = 28; // 28 minutes
+
+            const timeContainer = document.getElementById('time');
+            const birthdayFireworksContainer = document.getElementById('birthday-fireworks');
+
+            // --- BIRTHDAY CHECK ---
+            if (currentHour24 === targetHour24 && currentMinute === targetMinute) {
+
+                // 1. Hide the clock elements
+                timeContainer.style.display = 'none';
+
+                // 2. Display the birthday message
+                if (!document.getElementById('birthday-message')) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.id = 'birthday-message';
+                    messageDiv.innerHTML = `
+                        <p class="happy">HAPPY</p>
+                        <p class="age">22nd</p>
+                        <p class="birthday">BIRTHDAY</p>
+                        <p class="name">SAMEER!</p>
+                    `;
+                    // Append to the overall particles-js container, not birthday-fireworks, for proper layering
+                    document.getElementById('particles-js').appendChild(messageDiv);
+                }
+
+                // 3. Initialize/Manage Birthday Fireworks
+                if (!birthdayParticlesInstance) {
+                    // Only initialize if not already initialized
+                    // particlesJS takes two arguments: the element ID and the config object
+                    particlesJS("birthday-fireworks", birthdayFireworksConfig);
+                    // Get the reference to the newly created instance
+                    birthdayParticlesInstance = window.pJSDom.find(pjs => pjs.id === "birthday-fireworks");
+                    // Optional: Also ensure the background particles change color slightly to match
+                    if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].id === "particles-js") {
+                        window.pJSDom[0].pJS.particles.color.value = "#00FFFF"; // Cyan background
+                        window.pJSDom[0].pJS.fn.particlesDraw();
+                    }
+                }
+
+
+            } else {
+                // --- NORMAL CLOCK DISPLAY ---
+
+                // 1. Ensure clock elements are visible
+                timeContainer.style.display = 'flex';
+
+                // 2. Remove the birthday message if it exists
+                const existingMessage = document.getElementById('birthday-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+
+                // 3. Destroy Birthday Fireworks if they exist
+                if (birthdayParticlesInstance) {
+                    // Destroy the particles.js instance
+                    birthdayParticlesInstance.pJS.fn.vendors.destroypJS();
+                    birthdayParticlesInstance = null; // Clear the reference
+                    // Also clear the canvas element created by particles.js
+                    const canvas = document.querySelector('#birthday-fireworks canvas');
+                    if (canvas) canvas.remove();
+                    birthdayFireworksContainer.innerHTML = ''; // Ensure container is empty
+
+                    // Reset background particle color
+                    if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].id === "particles-js") {
+                        window.pJSDom[0].pJS.particles.color.value = "#ffffff";
+                        window.pJSDom[0].pJS.fn.particlesDraw();
+                    }
+                }
+
+                // 4. Update Clock Elements
+                let hours = document.getElementById("hours");
+                let mints = document.getElementById("minutes");
+                let sec = document.getElementById("seconds");
+                let ampm = document.getElementById("ampm");
+                let hh = document.getElementById('hh');
+                let mm = document.getElementById('mm');
+                let ss = document.getElementById('ss');
+                let hr_dot = document.querySelector('.hr_dot');
+                let min_dot = document.querySelector('.min_dot');
+                let sec_dot = document.querySelector('.sec_dot');
+
+                let h = currentHour24;
+                let m = currentMinute;
+                let s = date.getSeconds();
+                let am = h >= 12 ? "PM" : "AM";
+
+                // Convert to 12-hour format
+                if (h > 12) {
+                    h = h - 12;
+                }
+                // Handle 12 AM (midnight) case: 0 should be displayed as 12
+                if (h === 0) {
+                    h = 12;
+                }
+
+                // --- Formatting and Display ---
+                let hDisplay = (h < 10) ? "0" + h : h;
+                let mDisplay = (m < 10) ? "0" + m : m;
+                let sDisplay = (s < 10) ? "0" + s : s;
+
+                hours.innerHTML = hDisplay + "<br><span>Hours</span>";
+                mints.innerHTML = mDisplay + "<br><span>Minutes</span>";
+                sec.innerHTML = sDisplay + "<br><span>Seconds</span>";
+                ampm.innerHTML = am;
+
+                // --- SVG Circle Rotation (Stroke Dash Offset) ---
+                let hCalc = currentHour24 % 12;
+                const hourAngle = (hCalc * 30) + (m / 2);
+
+                hh.style.strokeDashoffset = 440 - (440 * hourAngle) / 360;
+                mm.style.strokeDashoffset = 440 - (440 * m) / 60;
+                ss.style.strokeDashoffset = 440 - (440 * s) / 60;
+
+                // --- Dot Rotation ---
+                hr_dot.style.transform = `rotate(${hourAngle}deg)`;
+                min_dot.style.transform = `rotate(${m * 6}deg)`;
+                sec_dot.style.transform = `rotate(${s * 6}deg)`;
+            }
+        }, 1000);
     </script>
 </body>
 
