@@ -4,202 +4,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>Digital Clock</title>
+    <!-- Load Particles.js library --><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200..900&display=swap" rel="stylesheet">
 
-    <title>DigitalClock</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* (Your existing CSS here, copied from previous response) */
+
+        /* Base Styles and Font */
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1d1d1d; /* Dark background */
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Particles.js Background Container */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Changed to 0 so clock is above it */
+        }
+
+        /* Clock Container */
+        #time {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 40px;
+            color: #40E0D0; /* Turquoise color for clock numbers */
+            z-index: 1;
+            /* Added for responsiveness */
+            flex-wrap: wrap; 
+            justify-content: center;
+        }
+
+        #time .circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #time .circle svg {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform: rotate(270deg);
+        }
+
+        #time .circle svg circle {
+            width: 100%;
+            height: 100%;
+            fill: transparent;
+            stroke: rgba(63, 47, 47, 0.5); /* Semi-transparent base circle */
+            stroke-width: 4;
+            transform: translate(5px, 5px);
+        }
+
+        #time .circle svg circle:nth-child(2) {
+            stroke: var(--clr);
+            stroke-dasharray: 440;
+            transition: stroke-dashoffset 1s linear; /* Smooth animation */
+        }
+
+        #time .circle div {
+            position: absolute;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.5em;
+        }
+
+        #time .circle div span {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.5em;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #time .ap {
+            position: relative;
+            font-size: 1.5em; /* Adjusted size */
+            transform: translateX(-10px);
+            font-weight: 600;
+            align-self: center;
+            color: #FF8C00; /* Orange AM/PM */
+        }
+
+        /* Dot Movement */
+        .dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            transition: transform 1s ease;
+        }
+
+        .dots::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            width: 10px;
+            height: 10px;
+            background: var(--clr);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+        }
+
+
+        /* --- UPDATED BIRTHDAY MESSAGE STYLING (BOY THEME) --- */
+        #birthday-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            line-height: 1;
+            /* Vibrant blue/cyan glow */
+            text-shadow: 0 0 15px #00FFFF, 0 0 50px #00BFFF; 
+        }
+
+        #birthday-message p {
+            font-weight: 900;
+            margin: 0;
+            padding: 5px 0;
+            transition: all 0.5s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        #birthday-message .happy {
+            font-size: 3.5em;
+            color: #FF8C00; /* Dark Orange */
+        }
+
+        #birthday-message .age {
+            font-size: 5em; 
+            color: #40E0D0; /* Turquoise/Cyan */
+            letter-spacing: 0.1em;
+        }
+
+        #birthday-message .birthday {
+            font-size: 7em;
+            color: #00BFFF; /* Deep Sky Blue */
+        }
+
+        #birthday-message .name {
+            font-size: 5.5em;
+            color: #FFFFFF; /* White/Silver */
+            margin-top: 15px;
+        }
+
+        /* Animation and Responsiveness */
+        #birthday-message p:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 600px) {
+            #time { gap: 20px; }
+            #time .circle { width: 100px; height: 100px; }
+            #time .circle svg { width: 100px; height: 100px; }
+            #time .circle svg circle { r: 50; cx: 50; cy: 50; }
+            #time .circle div { font-size: 1em; }
+
+            #birthday-message .happy { font-size: 2em; }
+            #birthday-message .age { font-size: 3em; }
+            #birthday-message .birthday { font-size: 4em; }
+            #birthday-message .name { font-size: 3.5em; }
+        }
+
+        /* NEW: Firework Container for Birthday */
+        #birthday-fireworks {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centered with message */
+            width: 100%; /* Take full width */
+            height: 100%; /* Take full height */
+            z-index: 9; /* Below the message, above background particles */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+    </style>
 </head>
 
 <body>
     <div id="particles-js">
         <div id="time">
-        <div class="circle" style="--clr : yellow">
-            <div class="dots hr_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="hh"></circle>
-            </svg>
-            <div id="hours">00</div>
+            <!-- HOURS --><div class="circle" style="--clr : #FF8C00">
+                <div class="dots hr_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="hh"></circle>
+                </svg>
+                <div id="hours">00</div>
+            </div>
+
+            <!-- MINUTES --><div class="circle" style="--clr : #00BFFF">
+                <div class="dots min_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="mm"></circle>
+                </svg>
+                <div id="minutes">00</div>
+            </div>
+
+            <!-- SECONDS --><div class="circle" style="--clr : #40E0D0">
+                <div class="dots sec_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="ss"></circle>
+                </svg>
+                <div id="seconds">00</div>
+            </div>
+
+            <!-- AM/PM --><div class="ap">
+                <div id="ampm">AM</div>
+            </div>
         </div>
-        <div class="circle" style="--clr : blue">
-            <div class="dots min_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="mm"></circle>
-            </svg>
-            <div id="minutes">00</div>
-        </div>
-        <div class="circle" style="--clr : green">
-            <div class="dots sec_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="ss"></circle>
-            </svg>
-            <div id="seconds">00</div>
-        </div>
-        <div class="ap">
-            <div id="ampm">AM</div>
-        </div>
-    </div>
-
-    </div>
-
-    
-<script>
-    // ParticleJS configuration remains here
-    particlesJS("particles-js", {
-        "particles": {
-            "number": {
-                "value": 80,
-                "density": { "enable": true, "value_area": 800 }
-            },
-            "color": { "value": "#ffffff" },
-            "shape": {
-                "type": "circle",
-                "stroke": { "width": 0, "color": "#000000" }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": false
-            },
-            "size": {
-                "value": 5,
-                "random": true
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 3,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out"
-            }
-        },
-        "interactivity": {
-            "events": {
-                "onhover": { "enable": true, "mode": "repulse" },
-                "onclick": { "enable": true, "mode": "push" }
-            },
-            "modes": {
-                "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
-                "push": { "particles_nb": 4 }
-            }
-        },
-        "retina_detect": true
-    });
-
-    // Main Clock Update Logic
-    setInterval(() => {
-        let date = new Date();
-        let currentHour24 = date.getHours();
-        let currentMinute = date.getMinutes();
-
-        // 🎯 Check for the target time: 9:28 PM (21:28 in 24-hour format)
-        // If you want it to display for the whole minute, keep it as is.
-        // If you want it to display for a longer time, you can add a timer or more complex check.
-        const targetHour24 = 21; // 9 PM
-        const targetMinute = 39; // 28 minutes
-
-        // Get the main clock container
-        const timeContainer = document.getElementById('time');
         
-        // Check if it's the birthday moment
-        if (currentHour24 === targetHour24 && currentMinute === targetMinute) {
-            
-            // 1. Hide the clock elements
-            timeContainer.style.display = 'none';
-            
-            // 2. Display the birthday message
-            if (!document.getElementById('birthday-message')) {
-                const messageDiv = document.createElement('div');
-                messageDiv.id = 'birthday-message';
-                messageDiv.innerHTML = `
-                    <p class="happy">HAPPY</p>
-                    <p class="birthday">BIRTHDAY</p>
-                    <p class="name">SAMEER!</p>
-                `;
-                document.getElementById('particles-js').appendChild(messageDiv);
-            }
+        <!-- NEW: Container for birthday specific fireworks --><div id="birthday-fireworks"></div>
 
-            // Optional: Change particle color for the birthday moment
-            if (window.pJSDom && window.pJSDom[0]) {
-                window.pJSDom[0].pJS.particles.color.value = "#FF69B4"; // Pink
-                window.pJSDom[0].pJS.fn.particlesDraw();
-            }
+    </div>
 
-        } else {
-            // 1. Ensure clock elements are visible
-            timeContainer.style.display = 'flex';
-            
-            // 2. Remove the birthday message if it exists
-            const existingMessage = document.getElementById('birthday-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-
-            // 3. Update Clock (Existing Logic)
-            
-            // --- Get Elements ---
-            let hours = document.getElementById("hours");
-            let mints = document.getElementById("minutes");
-            let sec = document.getElementById("seconds");
-            let ampm = document.getElementById("ampm");
-            let hh = document.getElementById('hh');
-            let mm = document.getElementById('mm');
-            let ss = document.getElementById('ss');
-            let hr_dot = document.querySelector('.hr_dot');
-            let min_dot = document.querySelector('.min_dot');
-            let sec_dot = document.querySelector('.sec_dot');
-            
-            let h = currentHour24;
-            let m = currentMinute;
-            let s = date.getSeconds();
-            let am = h >= 12 ? "PM" : "AM";
-            
-            if (h > 12) {
-                h = h - 12;
-            }
-
-            // Handle 12 AM (midnight) case
-            if (h === 0) {
-                h = 12;
-            }
-            
-            // --- Formatting and Display ---
-            h = (h < 10) ? "0" + h : h;
-            m = (m < 10) ? "0" + m : m;
-            s = (s < 10) ? "0" + s : s;
-
-            hours.innerHTML = h + "<br><span>Hours</span>";
-            mints.innerHTML = m + "<br><span>Minutes</span>";
-            sec.innerHTML = s + "<br><span>Seconds</span>";
-            ampm.innerHTML = am;
-
-            // --- SVG Circle Rotation ---
-            // Note: The `h` variable is the 12-hour format, so we use 12 for the divider.
-            // Need to convert 'h' back to a number for calculation.
-            let h_num = parseInt(h, 10);
-            if (h_num === 12 && am === 'AM') h_num = 0; // Treat 12 AM as 0 for calculation
-            
-            hh.style.strokeDashoffset = 440 - (440 * h_num) / 12;
-            mm.style.strokeDashoffset = 440 - (440 * m) / 60;
-            ss.style.strokeDashoffset = 440 - (440 * s) / 60;
-
-            // --- Dot Rotation ---
-            hr_dot.style.transform = `rotate(${h_num * 30 + (m / 2)}deg)`; // Added minute interpolation
-            min_dot.style.transform = `rotate(${m * 6}deg)`;
-            sec_dot.style.transform = `rotate(${s * 6}deg)`;
-        }
-    }, 1000);
-</script>
-
+    <script>
+        // (Your existing JavaScript code will go here, updated in next step)
+    </script>
 </body>
 
 </html>
