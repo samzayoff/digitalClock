@@ -1,3 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <title>DigitalClock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="particles-js">
+        <div id="time">
+        <div class="circle" style="--clr : yellow">
+            <div class="dots hr_dot"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" id="hh"></circle>
+            </svg>
+            <div id="hours">00</div>
+        </div>
+        <div class="circle" style="--clr : blue">
+            <div class="dots min_dot"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" id="mm"></circle>
+            </svg>
+            <div id="minutes">00</div>
+        </div>
+        <div class="circle" style="--clr : green">
+            <div class="dots sec_dot"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" id="ss"></circle>
+            </svg>
+            <div id="seconds">00</div>
+        </div>
+        <div class="ap">
+            <div id="ampm">AM</div>
+        </div>
+    </div>
+
+    </div>
+
+    
 <script>
     // ParticleJS configuration remains here
     particlesJS("particles-js", {
@@ -58,7 +105,7 @@
         // If you want it to display for the whole minute, keep it as is.
         // If you want it to display for a longer time, you can add a timer or more complex check.
         const targetHour24 = 21; // 9 PM
-        const targetMinute = 28; // 28 minutes
+        const targetMinute = 33; // 28 minutes
 
         // Get the main clock container
         const timeContainer = document.getElementById('time');
@@ -152,3 +199,7 @@
         }
     }, 1000);
 </script>
+
+</body>
+
+</html>
