@@ -7,6 +7,48 @@
     box-sizing: border-box;
 }
 
+/* Birthday Message Styling */
+
+#birthday-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 10;
+    line-height: 1; /* Adjust spacing between lines */
+    text-shadow: 0 0 10px #FF69B4, 0 0 40px #FF69B4; /* Pink glow */
+}
+
+#birthday-message p {
+    font-weight: 900;
+    margin: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+#birthday-message .happy {
+    font-size: 3.5em; /* Smaller top line */
+    color: #FFD700; /* Gold */
+}
+
+#birthday-message .birthday {
+    font-size: 7em; /* Largest line */
+    color: #FF69B4; /* Hot Pink */
+}
+
+#birthday-message .name {
+    font-size: 5em; /* Medium line */
+    color: #40E0D0; /* Turquoise */
+    margin-top: 10px;
+}
+
+/* Add a subtle animation to the message */
+#birthday-message p:hover {
+    transform: scale(1.05);
+}
+
+
 body{
     body {
     margin: 0;
@@ -111,3 +153,5 @@ body{
     background-color: #1d1d1d;
 }
 }
+
+
