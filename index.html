@@ -1,149 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
+<script>
+    // ParticleJS configuration remains here
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": { "enable": true, "value_area": 800 }
+            },
+            "color": { "value": "#ffffff" },
+            "shape": {
+                "type": "circle",
+                "stroke": { "width": 0, "color": "#000000" }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false
+            },
+            "size": {
+                "value": 5,
+                "random": true
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 3,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out"
+            }
+        },
+        "interactivity": {
+            "events": {
+                "onhover": { "enable": true, "mode": "repulse" },
+                "onclick": { "enable": true, "mode": "push" }
+            },
+            "modes": {
+                "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                "push": { "particles_nb": 4 }
+            }
+        },
+        "retina_detect": true
+    });
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    // Main Clock Update Logic
+    setInterval(() => {
+        let date = new Date();
+        let currentHour24 = date.getHours();
+        let currentMinute = date.getMinutes();
 
-    <title>DigitalClock</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+        // 🎯 Check for the target time: 9:28 PM (21:28 in 24-hour format)
+        // If you want it to display for the whole minute, keep it as is.
+        // If you want it to display for a longer time, you can add a timer or more complex check.
+        const targetHour24 = 21; // 9 PM
+        const targetMinute = 28; // 28 minutes
 
-<body>
-    <div id="particles-js">
-        <div id="time">
-        <div class="circle" style="--clr : yellow">
-            <div class="dots hr_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="hh"></circle>
-            </svg>
-            <div id="hours">00</div>
-        </div>
-        <div class="circle" style="--clr : blue">
-            <div class="dots min_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="mm"></circle>
-            </svg>
-            <div id="minutes">00</div>
-        </div>
-        <div class="circle" style="--clr : green">
-            <div class="dots sec_dot"></div>
-            <svg>
-                <circle cx="70" cy="70" r="70"></circle>
-                <circle cx="70" cy="70" r="70" id="ss"></circle>
-            </svg>
-            <div id="seconds">00</div>
-        </div>
-        <div class="ap">
-            <div id="ampm">AM</div>
-        </div>
-    </div>
+        // Get the main clock container
+        const timeContainer = document.getElementById('time');
+        
+        // Check if it's the birthday moment
+        if (currentHour24 === targetHour24 && currentMinute === targetMinute) {
+            
+            // 1. Hide the clock elements
+            timeContainer.style.display = 'none';
+            
+            // 2. Display the birthday message
+            if (!document.getElementById('birthday-message')) {
+                const messageDiv = document.createElement('div');
+                messageDiv.id = 'birthday-message';
+                messageDiv.innerHTML = `
+                    <p class="happy">HAPPY</p>
+                    <p class="birthday">BIRTHDAY</p>
+                    <p class="name">SAMEER!</p>
+                `;
+                document.getElementById('particles-js').appendChild(messageDiv);
+            }
 
-    </div>
+            // Optional: Change particle color for the birthday moment
+            if (window.pJSDom && window.pJSDom[0]) {
+                window.pJSDom[0].pJS.particles.color.value = "#FF69B4"; // Pink
+                window.pJSDom[0].pJS.fn.particlesDraw();
+            }
 
-    
-    <script>
-        particlesJS("particles-js", {
-    "particles": {
-      "number": {
-        "value": 80,
-        "density": { "enable": true, "value_area": 800 }
-      },
-      "color": { "value": "#ffffff" },
-      "shape": {
-        "type": "circle",
-        "stroke": { "width": 0, "color": "#000000" }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false
-      },
-      "size": {
-        "value": 5,
-        "random": true
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 150,
-        "color": "#ffffff",
-        "opacity": 0.4,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 3,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "out_mode": "out"
-      }
-    },
-    "interactivity": {
-      "events": {
-        "onhover": { "enable": true, "mode": "repulse" },
-        "onclick": { "enable": true, "mode": "push" }
-      },
-      "modes": {
-        "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
-        "push": { "particles_nb": 4 }
-      }
-    },
-    "retina_detect": true
-  });
+        } else {
+            // 1. Ensure clock elements are visible
+            timeContainer.style.display = 'flex';
+            
+            // 2. Remove the birthday message if it exists
+            const existingMessage = document.getElementById('birthday-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
 
-
-        setInterval(() => {
-
-          
+            // 3. Update Clock (Existing Logic)
+            
+            // --- Get Elements ---
             let hours = document.getElementById("hours");
             let mints = document.getElementById("minutes");
             let sec = document.getElementById("seconds");
             let ampm = document.getElementById("ampm");
-
             let hh = document.getElementById('hh');
             let mm = document.getElementById('mm');
             let ss = document.getElementById('ss');
-
-
             let hr_dot = document.querySelector('.hr_dot');
             let min_dot = document.querySelector('.min_dot');
-            let sec_dot = document.querySelector('.sec_dot')
-
-            let h = new Date().getHours();
-            let m = new Date().getMinutes();
-            let s = new Date().getSeconds();
+            let sec_dot = document.querySelector('.sec_dot');
+            
+            let h = currentHour24;
+            let m = currentMinute;
+            let s = date.getSeconds();
             let am = h >= 12 ? "PM" : "AM";
+            
             if (h > 12) {
                 h = h - 12;
             }
 
+            // Handle 12 AM (midnight) case
+            if (h === 0) {
+                h = 12;
+            }
+            
+            // --- Formatting and Display ---
             h = (h < 10) ? "0" + h : h;
             m = (m < 10) ? "0" + m : m;
-            s = (s <10) ? "0" + s : s;
-
+            s = (s < 10) ? "0" + s : s;
 
             hours.innerHTML = h + "<br><span>Hours</span>";
             mints.innerHTML = m + "<br><span>Minutes</span>";
             sec.innerHTML = s + "<br><span>Seconds</span>";
-            ampm.innerHTML = am
+            ampm.innerHTML = am;
 
-            hh.style.strokeDashoffset = 440 - (440 * h) / 12 ;
-            mm.style.strokeDashoffset = 440 - (440*m) /60 ;
-            ss.style.strokeDashoffset = 440 - (440*s) /60 ;
+            // --- SVG Circle Rotation ---
+            // Note: The `h` variable is the 12-hour format, so we use 12 for the divider.
+            // Need to convert 'h' back to a number for calculation.
+            let h_num = parseInt(h, 10);
+            if (h_num === 12 && am === 'AM') h_num = 0; // Treat 12 AM as 0 for calculation
+            
+            hh.style.strokeDashoffset = 440 - (440 * h_num) / 12;
+            mm.style.strokeDashoffset = 440 - (440 * m) / 60;
+            ss.style.strokeDashoffset = 440 - (440 * s) / 60;
 
-            hr_dot.style.transform = `rotate(${h*30}deg)`;
+            // --- Dot Rotation ---
+            hr_dot.style.transform = `rotate(${h_num * 30 + (m / 2)}deg)`; // Added minute interpolation
             min_dot.style.transform = `rotate(${m * 6}deg)`;
             sec_dot.style.transform = `rotate(${s * 6}deg)`;
-             
-        },1000)
-
-
-
-    </script>
-
-</body>
-
-</html>
+        }
+    }, 1000);
+</script>
